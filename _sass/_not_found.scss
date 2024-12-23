@@ -1,0 +1,23 @@
+body > #not_found {
+  article {
+    width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 4em;
+    line-height: 0;
+
+    h1 {
+      font-size: 6em;
+    }
+
+    a {
+      color: #dc8100;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #333;
+      text-decoration: none;
+    }
+  }
+}

@@ -3,43 +3,45 @@ layout: default
 title: "Home"
 ---
 
-<article class="top_note">
-  <h1>GitHuber正在升级</h1>
-  <div class="content">
-    <p>感谢您的访问！GitHuber正在进行重大升级维护，预计将持续数周。在此期间登录、搜索等服务暂时关闭，星榜将不定期在此更新。有任何问题请联系<a href="mailto:{{ site.email }}">邮件</a>。</p>
-  </div>
-</article>
+<div id="home">
+  <article class="top_note">
+    <h1>GitHuber正在升级</h1>
+    <div class="content">
+      <p>感谢您的访问！GitHuber正在进行重大升级维护，预计将持续数周。在此期间登录、搜索等服务暂时关闭，星榜将不定期在此更新。有任何问题请联系<a href="mailto:{{ site.email }}">邮件</a>。</p>
+    </div>
+  </article>
 
-{% assign rank = site.data.rank.rank %}
-{% assign rank_updated_at = site.data.rank.updated_at %}
-{% assign column_titles = ",状元,榜眼,探花,四,五,六,七,八,九,十" | split: "," %}
+  {% assign rank = site.data.rank.rank %}
+  {% assign rank_updated_at = site.data.rank.updated_at %}
+  {% assign column_titles = ",状元,榜眼,探花,四,五,六,七,八,九,十" | split: "," %}
 
-<article class="rank">
-  <table>
-    <tr class="row title">
-      {% for title in column_titles %}
-      <td>{{ title }}</td>
+  <article class="rank">
+    <table>
+      <tr class="row title">
+        {% for title in column_titles %}
+        <td>{{ title }}</td>
+        {% endfor %}
+      </tr>
+      {% for item in rank %}
+      <tr class="row">
+        <td class="lang">{{ item[0] }}</td>
+        {% for user in item[1] %}
+        <td class="user"><a href="https://github.com/{{ user.login }}" target="_blank">{{ user.name | default: user.login }}</a></td>
+        {% endfor %}
+      </tr>
       {% endfor %}
-    </tr>
-    {% for item in rank %}
-    <tr class="row">
-      <td class="lang">{{ item[0] }}</td>
-      {% for user in item[1] %}
-      <td class="user"><a href="https://github.com/{{ user.login }}" target="_blank">{{ user.name | default: user.login }}</a></td>
-      {% endfor %}
-    </tr>
-    {% endfor %}
-  </table>
+    </table>
 
-  <div class="note">
-    <ul>
-      <li>排名以GitHub官方数据作为唯一权威来源</li>
-      <li>排名以开发者在某编程语言上的所有项目(repo)所收获的星星(star)总数为序</li>
-      <li>项目的编程语言以GitHub认定的主要编程语言为准，这适用于使用了多种编程语言的项目</li>
-    </ul>
-  </div>
+    <div class="note">
+      <ul>
+        <li>排名以GitHub官方数据作为唯一权威来源</li>
+        <li>排名以开发者在某编程语言上的所有项目(repo)所收获的星星(star)总数为序</li>
+        <li>项目的编程语言以GitHub认定的主要编程语言为准，这适用于使用了多种编程语言的项目</li>
+      </ul>
+    </div>
 
-  <div class="updated_at">
-    更新于{{ rank_updated_at }}
-  </div>
-</article>
+    <div class="updated_at">
+      更新于{{ rank_updated_at }}
+    </div>
+  </article>
+</div>
